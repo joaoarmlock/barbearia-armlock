@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0F0F0F">
+    <title>Barbearia ArmLock | O Templo do Degradê e Jiu-Jitsu</title>
+    <style>
+        :root {
+            --bg: #0F0F0F;
+            --card: #141414;
+            --card-hover: #191919;
+            --red: #FF2E2E;
+            --gold: #E5B842;
+            --gold-glow: rgba(229,184,66,0.3);
+            --w: #FFFFFF;
+            --mut: #8E8E93;
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--w);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding-bottom: 220px;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Tela de Carregamento / Splash Screen Blindada */
+        #splash {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease;
+        }
+        .splash-belt {
+            width: 160px;
+            height: 6px;
+            background: linear-gradient(90deg, #fff 0%, #fff 70%, #000 70%, #000 75%, var(--red) 75%, var(--red) 100%);
+            margin-top: 20px;
+            border-radius: 99px;
+            animation: pulseBelt 1s infinite alternate;
+        }
+        @keyframes pulseBelt {
+            to { transform: scale(1.05); box-shadow: 0 0 15px var(--red); }
+        }
+
+        header {
+            text-align: center;
+            padding: 24px 20px 16px;
+        }
+
+        .logo-img {
+            width: 110px;
+            height: auto;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 12px rgba(229,184,66,0.25));
+        }
+
+        .slogan {
+            font-family: 'Impact', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+        .slogan span { color: var(--red); }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .sbtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: var(--w);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .sbtn.gg { border-color: rgba(229,184,66,0.3); color: var(--gold); }
+        .sbtn:active { transform: scale(0.96); background: var(--card-hover); }
+
+        .loc-card {
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 20px;
+            padding: 16px;
+            text-align: left;
+            position: relative;
+            margin: 0 16px;
+        }
+
+        .gps-trigger {
+            position: absolute;
+            top: 14px; right: 14px;
+            background: #1c1c1e;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: var(--gold);
+            display: flex; gap: 4px; align-items: center; font-size: 0.7rem; font-weight: 700;
+        }
+
+        .loc-card h3 { font-size: 0.85rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 4px; }
+        .loc-card p { font-size: 0.9rem; color: #E5E5EA; font-weight: 500; width: 70%; }
+
+        .cronograma {
+            width: 100%;
+            margin-top: 12px;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+        .cronograma td { padding: 8px 0; border-top: 1px solid #222; color: #AEAED2; }
+        .cronograma td:last-child { text-align: right; color: var(--w); font-weight: 600; }
+
+        .section-title { font-size: 1.15rem; text-transform: uppercase; letter-spacing: 1px; margin: 32px 16px 4px; font-weight: 800; }
+        .sub-title { font-size: 0.8rem; color: var(--mut); margin: 0 16px 16px; }
+
+        /* Escolha de Profissionais (Apenas André e João Paulo) */
+        .barber-container { display: flex; justify-content: center; gap: 32px; padding: 8px 16px; }
+        .barber-card { background: none; border: none; color: var(--w); cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+        .story-ring {
+            width: 88px; height: 88px; border-radius: 50%; padding: 3px;
+            background: linear-gradient(45deg, var(--red), #C13584, var(--gold));
+            position: relative; margin-bottom: 6px; transition: transform 0.3s ease;
+        }
+        .story-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--bg); background: #222; }
+        .verified-badge {
+            position: absolute; bottom: 2px; right: 2px; background: var(--gold); color: #000;
+            font-size: 0.55rem; font-weight: 900; padding: 2px 6px; border-radius: 10px;
+            border: 2px solid var(--bg); transform: scale(0); transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .barber-card.selected .story-ring { background: var(--gold); box-shadow: 0 0 25px var(--gold-glow); transform: scale(1.06); }
+        .barber-card.selected .verified-badge { transform: scale(1); }
+        .barber-card span { font-size: 0.82rem; font-weight: 600; color: #AEAED2; }
+        .barber-card.selected span { color: var(--w); font-weight: 700; }
+
+        /* Navegação Fixa / Sticky Nav */
+        nav {
+            position: sticky; top: 0; z-index: 100; display: flex; gap: 8px; padding: 12px 16px;
+            background: rgba(15,15,15,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        nav a {
+            flex: 1; text-align: center; text-decoration: none; color: #AEAED2; background: var(--card);
+            border: 1px solid rgba(255,255,255,0.04); padding: 12px 8px; border-radius: 14px; font-size: 0.8rem; font-weight: 700;
+        }
+        nav a.active-nav { color: var(--w); background: rgba(255,255,255,0.06); border-color: var(--gold); }
+
+        /* Filtro de Cabelo Visagista */
+        .hair-filter-box { margin: 24px 16px 0; background: var(--card); border-radius: 20px; padding: 16px; border: 1px solid rgba(255,255,255,0.04); }
+        .filter-title { font-size: 0.8rem; color: var(--gold); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+        .chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .chip {
+            background: #0A0A0A; border: 1px solid #222; color: #AEAED2; padding: 8px 14px;
+            border-radius: 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+        }
+        .chip.active { background: var(--w); color: #000; border-color: var(--w); font-weight: 700; box-shadow: 0 4px 12px rgba(255,255,255,0.15); }
+
+        /* Serviços com Imagens Customizadas Cartoon (Zero Bugs) */
+        .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
+        .service-card {
+            background: var(--card); border: 1.5px solid rgba(255,255,255,0.04);
+            border-radius: 20px; padding: 12px; cursor: pointer; display: flex; flex-direction: column;
+            transition: all 0.25s ease; position: relative;
+        }
+        .service-card img { width: 100%; height: 110px; border-radius: 14px; object-fit: cover; background: #1a1a1a; margin-bottom: 8px; }
+        .service-card h5 { font-size: 0.85rem; font-weight: 700; line-height: 1.2; margin-bottom: 2px; }
+        .service-card h5 small { color: var(--mut); font-size: 0.7rem; display: block; margin-top: 2px; }
+        .service-card .price-tag { color: var(--gold); font-weight: 800; font-size: 0.88rem; margin-top: auto; margin-bottom: 8px; }
+        .service-card.selected { border-color: var(--gold); box-shadow: 0 6px 20px var(--gold-glow); background: linear-gradient(180deg, rgba(229,184,66,0.06) 0%, var(--card) 100%); transform: translateY(-2px); }
+
+        /* Seção de Agendamento */
+        .booking-box { margin: 0 16px; background: var(--card); border-radius: 20px; padding: 16px; border: 1px solid rgba(255,255,255,0.04); }
+        .booking-box input[type=date] {
+            width: 100%; background: #0A0A0A; color: var(--w); border: 1.5px solid #222;
+            border-radius: 14px; padding: 14px; font-family: inherit; font-size: 0.95rem; margin-bottom: 4px;
+        }
+        .error-banner { font-size: 0.78rem; color: var(--red); font-weight: 600; min-height: 18px; margin-bottom: 4px; }
+        .turn-title { font-size: 0.75rem; color: var(--gold); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 8px; }
+        
+        .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .time-slot {
+            position: relative; background: #0A0A0A; color: #E5E5EA; border: 1.5px solid #222;
+            border-radius: 12px; padding: 14px 4px; font-family: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;
+        }
+        .time-slot.selected { border-color: var(--red); background: rgba(255,46,46,0.08); color: #fff; }
+        .time-slot:disabled { opacity: 0.15; pointer-events: none; background: #111; }
+        .badge {
+            position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+            background: var(--red); color: #fff; font-size: 0.5rem; font-weight: 800;
+            padding: 1px 6px; border-radius: 99px; white-space: nowrap;
+        }
+        .badge.gold { background: var(--gold); color: #000; }
+
+        /* Carrinho Gamificado Flutuante (Dopamina Máxima) */
+        #checkout-bar {
+            position: fixed; left: 50%; bottom: 0; transform: translate(-50%, 110%);
+            width: 100%; max-width: 480px; z-index: 999; background: #111;
+            border-top: 3px solid var(--gold); padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.12);
+            border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+        }
+        #checkout-bar.active { transform: translate(-50%, 0); }
+        .bar-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .bar-label { font-size: 0.7rem; color: var(--mut); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        #rank-badge { font-size: 0.65rem; font-weight: 900; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; background: var(--gold); color: #000; }
+        #cart-summary { font-size: 0.85rem; font-weight: 600; color: #E5E5EA; max-width: 65%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .total-display { font-size: 1.3rem; font-weight: 900; color: var(--gold); }
+        .progress-track { height: 6px; background: #222; border-radius: 99px; overflow: hidden; margin: 6px 0 14px; }
+        .progress-fill { height: 100%; width: 0%; border-radius: 99px; background: var(--gold); transition: width 0.4s ease; }
+        
+        #submit-btn {
+            width: 100%; border: none; border-radius: 16px; padding: 16px; font-family: inherit;
+            font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px; cursor: pointer;
+            background: #222; color: #555; pointer-events: none; transition: all 0.2s ease;
+        }
+        #submit-btn.unlocked { pointer-events: auto; background: #0E9F6E; color: var(--w); box-shadow: 0 4px 15px rgba(14,159,110,0.3); }
+        #submit-btn.unlocked:active { transform: scale(0.97); }
+    </style>
+</head>
+<body>
+
+    <!-- Splash Screen Blindada contra Tela Preta -->
+    <div id="splash">
+        <h1 class="slogan" style="font-size: 1.8rem; text-align: center;">BARBEARIA<br><span style="color:var(--red)">ARMLOCK</span></h1>
+        <div class="splash-belt"></div>
+    </div>
+
+    <!-- Header & Logo Oficial -->
+    <header>
+        <img src="logo.png" alt="Logo Barbearia ArmLock" class="logo-img" onerror="this.style.display='none'">
+        <div class="slogan">Dê um ArmLock<br><span>no seu visual</span></div>
+        <div style="font-size: 0.85rem; color: var(--mut); margin-bottom: 16px;">@barbearia_armlock</div>
+
+        <div class="social-grid">
+            <a href="https://instagram.com" target="_blank" class="sbtn">📸 Instagram Oficial</a>
+            <a href="https://google.com" target="_blank" class="sbtn gg">⭐ Avaliações Google</a>
+        </div>
+    </header>
+
+    <!-- Localização e GPS -->
+    <div class="loc-card">
+        <button class="gps-trigger" onclick="openGPS()">📍 Rota GPS</button>
+        <h3>TATAME CENTRAL</h3>
+        <p>Vila Nova Bonsucesso, Guarulhos - SP</p>
+        <table class="cronograma">
+            <tr><td>Segunda a Sábado</td><td>09h às 19h</td></tr>
+            <tr><td>Domingos</td><td>Fechado</td></tr>
+        </table>
+    </div>
+
+    <!-- Menu Sticky -->
+    <nav id="nav-bar">
+        <a href="#profissionais-section" class="active-nav">🪒 Profissionais</a>
+        <a href="#servicos-section">🥋 Técnicas & Serviços</a>
+    </nav>
+
+    <!-- 1. Escolha do Profissional (Apenas André e João Paulo) -->
+    <div id="profissionais-section" class="section-title">1. Escolha o Faixa-Preta</div>
+    <div class="sub-title">Selecione o profissional encarregado do seu visual</div>
+    <div class="barber-container">
+        <!-- André -->
+        <button class="barber-card" onclick="selectBarber('André', this)">
+            <div class="story-ring">
+                <img src="andre.jpg" alt="André">
+                <div class="verified-badge">VIP</div>
+            </div>
+            <span>André</span>
+        </button>
+        
+        <!-- João Paulo -->
+        <button class="barber-card" onclick="selectBarber('João Paulo', this)">
+            <div class="story-ring">
+                <img src="joao.jpg" alt="João Paulo">
+                <div class="verified-badge">VIP</div>
+            </div>
+            <span>João Paulo</span>
+        </button>
+    </div>
+
+    <!-- Filtro de Cabelo Atual -->
+    <div class="hair-filter-box">
+        <div class="filter-title">🎯 Qual o seu tipo de cabelo atual?</div>
+        <div class="chip-group">
+            <button class="chip" onclick="selectChip('hair', 'Liso', this)">Liso</button>
+            <button class="chip" onclick="selectChip('hair', 'Ondulado', this)">Ondulado</button>
+            <button class="chip" onclick="selectChip('hair', 'Crespo', this)">Crespo</button>
+            <button class="chip" onclick="selectChip('hair', 'Afro', this)">Afro</button>
+        </div>
+        <div class="filter-title" style="margin-top: 14px;">✂️ Qual o corte objetivo?</div>
+        <div class="chip-group">
+            <button class="chip" onclick="selectChip('style', 'Degradê Navalhado', this)">Degradê Navalhado</button>
+            <button class="chip" onclick="selectChip('style', 'Americano / Tape', this)">Americano / Tape</button>
+            <button class="chip" onclick="selectChip('style', 'Social Clássico', this)">Social Clássico</button>
+            <button class="chip" onclick="selectChip('style', 'Moicano / Mullet', this)">Moicano / Mullet</button>
+        </div>
+    </div>
+
+    <!-- 2. Técnicas e Serviços (Com as Imagens Cartoon Correspondentes Exatas) -->
+    <div id="servicos-section" class="section-title" style="padding-top: 16px;">🥋 Técnicas & Serviços</div>
+    <div class="sub-title">Selecione o serviço com a identidade do Jiu-Jitsu</div>
+
+    <div class="extras-grid">
+        <!-- Corte Armlock -->
+        <div class="service-card" data-id="corte" data-base="Corte [Armlock]" data-price="45.00" onclick="clickServiceCard(this, event)">
+            <img src="armlock.png" alt="Corte Armlock">
+            <h5>Corte <small>[Armlock]</small></h5>
+            <div class="price-tag">R$ 45,00</div>
+        </div>
+
+        <!-- Barba Ezequiel -->
+        <div class="service-card" data-id="barba" data-base="Barba [Ezequiel]" data-price="45.00" onclick="clickServiceCard(this, event)">
+            <img src="ezequiel.png" alt="Barba Ezequiel">
+            <h5>Barba <small>[Ezequiel]</small></h5>
+            <div class="price-tag">R$ 45,00</div>
+        </div>
+
+        <!-- Progressiva Guarda Fechada -->
+        <div class="service-card" data-id="progressiva" data-base="Progressiva [Guarda Fechada]" data-price="80.00" onclick="clickServiceCard(this, event)">
+            <img src="progressiva.png" alt="Progressiva">
+            <h5>Progressiva <small>[Guarda Fechada]</small></h5>
+            <div class="price-tag">R$ 80,00</div>
+        </div>
+
+        <!-- Barboterapia Leglock -->
+        <div class="service-card" data-id="barboterapia" data-base="Barboterapia [Leglock]" data-price="50.00" onclick="clickServiceCard(this, event)">
+            <img src="leglock.png" alt="Barboterapia">
+            <h5>Barboterapia <small>[Leglock]</small></h5>
+            <div class="price-tag">R$ 50,00</div>
+        </div>
+
+        <!-- Pezinho De La Riva -->
+        <div class="service-card" data-id="pezinho" data-base="Pezinho [De La Riva]" data-price="15.00" onclick="clickServiceCard(this, event)">
+            <img src="delariva.png" alt="Pezinho">
+            <h5>Pezinho <small>[De La Riva]</small></h5>
+            <div class="price-tag">R$ 15,00</div>
+        </div>
+
+        <!-- Botox Chave de Pulso -->
+        <div class="service-card" data-id="botox" data-base="Botox [Chave de Pulso]" data-price="70.00" onclick="clickServiceCard(this, event)">
+            <img src="chavedepulso.png" alt="Botox">
+            <h5>Botox <small>[Chave de Pulso]</small></h5>
+            <div class="price-tag">R$ 70,00</div>
+        </div>
+
+        <!-- Freestyle Triângulo -->
+        <div class="service-card" data-id="freestyle" data-base="Freestyle [Triângulo]" data-price="25.00" onclick="clickServiceCard(this, event)">
+            <img src="triangulo.png" alt="Freestyle">
+            <h5>Freestyle <small>[Triângulo]</small></h5>
+            <div class="price-tag">R$ 25,00</div>
+        </div>
+
+        <!-- Penteado Mata-Barata -->
+        <div class="service-card" data-id="penteado" data-base="Penteado [Mata-Barata]" data-price="30.00" onclick="clickServiceCard(this, event)">
+            <img src="matabarata.png" alt="Penteado">
+            <h5>Penteado <small>[Mata-Barata]</small></h5>
+            <div class="price-tag">R$ 30,00</div>
+        </div>
+    </div>
+
+    <!-- 3. Data e Horário -->
+    <div class="section-title" style="margin-top: 32px;">3. Data e Horário</div>
+    <div class="sub-title">Defina o momento do seu combate na agenda</div>
+
+    <div class="booking-box">
+        <input type="date" id="dateSelector" onchange="handleDateSelection(this.value)">
+        <div id="dateAlert" class="error-banner"></div>
+
+        <div class="turn-title">🌅 Período da Manhã</div>
+        <div id="morning-slots" class="slots-grid"></div>
+
+        <div class="turn-title">🌆 Período da Tarde</div>
+        <div id="afternoon-slots" class="slots-grid"></div>
+    </div>
+
+    <!-- Carrinho Gamificado Flutuante -->
+    <div id="checkout-bar">
+        <div class="bar-row">
+            <span class="bar-label">Graduação do Estilo</span>
+            <span id="rank-badge">Faixa Branca</span>
+        </div>
+        <div class="bar-row">
+            <div id="cart-summary">Nenhum serviço selecionado</div>
+            <div class="total-display">R$ <span id="total-val">0,00</span></div>
+        </div>
+        <div class="progress-track">
+            <div id="progress-fill-bar" class="progress-fill"></div>
+        </div>
+        <button id="submit-btn" onclick="executeOrder()">Escolha Profissional, Data e Horário</button>
+    </div>
+
+    <!-- Script de Lógica Consolidado e Seguro -->
+    <script>
+        let appState = {
+            barber: '',
+            services: {},
+            dateStr: '',
+            timeSlot: '',
+            rawPrice: 0,
+            hairType: '',
+            styleObjective: ''
+        };
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash');
+                if(splash) {
+                    splash.style.opacity = '0';
+                    setTimeout(() => splash.remove(), 400);
+                }
+            }, 800);
+        });
+
+        const picker = document.getElementById('dateSelector');
+        const tzToday = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Sao_Paulo"}));
+        picker.min = `${tzToday.getFullYear()}-${String(tzToday.getMonth() + 1).padStart(2, '0')}-${String(tzToday.getDate()).padStart(2, '0')}`;
+
+        window.addEventListener('scroll', () => {
+            const servSec = document.getElementById('servicos-section');
+            const links = document.querySelectorAll('#nav-bar a');
+            if(window.scrollY >= servSec.offsetTop - 90) {
+                links[0].classList.remove('active-nav'); links[1].classList.add('active-nav');
+            } else {
+                links[1].classList.remove('active-nav'); links[0].classList.add('active-nav');
+            }
+        });
+
+        function openGPS() {
+            window.open("https://maps.google.com/?q=Vila+Nova+Bonsucesso+Guarulhos", "_blank");
+        }
+
+        function selectChip(type, value, element) {
+            const parent = element.closest('.chip-group');
+            parent.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+            if(type === 'hair') appState.hairType = value;
+            if(type === 'style') appState.styleObjective = value;
+        }
+
+        function selectBarber(name, element) {
+            document.querySelectorAll('.barber-card').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            appState.barber = name;
+            validateAppState();
+        }
+
+        function clickServiceCard(card, event) {
+            const serviceId = card.getAttribute('data-id');
+            const baseName = card.getAttribute('data-base');
+            const currentPrice = parseFloat(card.getAttribute('data-price'));
+
+            if(card.classList.contains('selected')) {
+                card.classList.remove('selected');
+                delete appState.services[serviceId];
+            } else {
+                card.classList.add('selected');
+                appState.services[serviceId] = { name: baseName, price: currentPrice };
+            }
+            updateCheckoutData();
+        }
+
+        function handleDateSelection(dateValue) {
+            appState.dateStr = ''; appState.timeSlot = '';
+            document.getElementById('dateAlert').innerText = '';
+            if(!dateValue) { buildTimeSlots(false); return; }
+            const dateParts = dateValue.split('-');
+            const processedDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+            if(processedDate.getDay() === 0) {
+                document.getElementById('dateAlert').innerText = 'Fechado aos Domingos! Descanse os músculos e escolha outro dia.';
+                picker.value = ''; buildTimeSlots(false); return;
+            }
+            appState.dateStr = processedDate.toLocaleDateString('pt-BR', {timeZone: 'America/Sao_Paulo'});
+            buildTimeSlots(true);
+            validateAppState();
+        }
+
+        function buildTimeSlots(canRender) {
+            const morningContainer = document.getElementById('morning-slots');
+            const afternoonContainer = document.getElementById('afternoon-slots');
+            morningContainer.innerHTML = ''; afternoonContainer.innerHTML = '';
+            if(!canRender) return;
+            const pipeline = ['09:00','09:40','10:20','11:00','11:40','13:00','13:40','14:20','15:00','15:40','16:20','17:00','17:40','18:20'];
+            pipeline.forEach((time, index) => {
+                const slotButton = document.createElement('button');
+                slotButton.className = 'time-slot'; 
+                slotButton.innerText = time;
+                if(index === 1 || index === 7) slotButton.innerHTML += `<span class="badge">Última Vaga</span>`;
+                else if(index === 4 || index === 10) slotButton.innerHTML += `<span class="badge gold">Disputado</span>`;
+                slotButton.onclick = () => {
+                    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                    slotButton.classList.add('selected'); 
+                    appState.timeSlot = time; 
+                    validateAppState();
+                };
+                if(parseInt(time.split(':')) < 12) morningContainer.appendChild(slotButton);
+                else afternoonContainer.appendChild(slotButton);
+            });
+        }
+
+        function updateCheckoutData() {
+            let summaryList = []; 
+            appState.rawPrice = 0;
+            
+            Object.values(appState.services).forEach(item => { 
+                summaryList.push(item.name); 
+                appState.rawPrice += item.price; 
+            });
+
+            const bar = document.getElementById('checkout-bar');
+            const barFill = document.getElementById('progress-fill-bar');
+            const badge = document.getElementById('rank-badge');
+            
+            if(appState.rawPrice > 0) bar.classList.add('active'); else bar.classList.remove('active');
+            document.getElementById('total-val').innerText = appState.rawPrice.toFixed(2).replace('.', ',');
+            document.getElementById('cart-summary').innerText = summaryList.length > 0 ? summaryList.join(' + ') : 'Nenhum serviço selecionado';
+            
+            let progressPercent = Math.min((appState.rawPrice / 150) * 100, 100);
+            barFill.style.width = progressPercent + '%';
+
+            if(appState.rawPrice <= 40) {
+                badge.innerText = 'Faixa Branca';
+            } else if(appState.rawPrice <= 70) {
+                badge.innerText = 'Faixa Azul';
+            } else if(appState.rawPrice <= 110) {
+                badge.innerText = 'Faixa Roxa';
+            } else if(appState.rawPrice <= 150) {
+                badge.innerText = 'Faixa Marrom';
+            } else {
+                badge.innerText = 'Faixa Preta Absoluto';
+            }
+            validateAppState();
+        }
+
+        function validateAppState() {
+            const mainActionBtn = document.getElementById('submit-btn');
+            if(appState.barber && appState.dateStr && appState.timeSlot && appState.rawPrice > 0) {
+                mainActionBtn.classList.add('unlocked'); 
+                mainActionBtn.innerText = 'FINALIZAR AGENDAMENTO NO WHATSAPP';
+            } else {
+                mainActionBtn.classList.remove('unlocked');
+                let blocksMissing = [];
+                if(!appState.barber) blocksMissing.push('Profissional');
+                if(!appState.dateStr || !appState.timeSlot) blocksMissing.push('Data/Horário');
+                if(appState.rawPrice === 0) blocksMissing.push('Serviço');
+                mainActionBtn.innerText = 'Falta selecionar: ' + blocksMissing.join(', ');
+            }
+        }
+
+        function executeOrder() {
+            if(!appState.barber || !appState.dateStr || !appState.timeSlot || appState.rawPrice === 0) return;
+            
+            let textBlocks = Object.values(appState.services).map(item => `- ${item.name} (R$ ${item.price.toFixed(2).replace('.', ',')})`).join('\n');
+            const currentRank = document.getElementById('rank-badge').innerText;
+            
+            let metaText = '';
+            if(appState.hairType) metaText += `\n💈 *Tipo de Cabelo:* ${appState.hairType}`;
+            if(appState.styleObjective) metaText += `\n🎯 *Corte Alvo:* ${appState.styleObjective}`;
+            
+            const payloadMessage = `Oss! 🥋 Vim pelo site agendar meu horário na Barbearia ArmLock:\n\n` +
+                `🪒 *Profissional:* ${appState.barber}\n` +
+                `📅 *Data:* ${appState.dateStr} | ⏰ *Horário:* ${appState.timeSlot}${metaText}\n\n` +
+                `📋 *Serviços Selecionados [${currentRank}]:*\n${textBlocks}\n\n` +
+                `💰 *Valor Total:* R$ ${appState.rawPrice.toFixed(2).replace('.', ',')}\n\n` +
+                `Pode confirmar minha vaga no tatame?`;
+                
+            window.open("https://wa.me/5511999999999?text=" + encodeURIComponent(payloadMessage), '_blank');
+        }
+    </script>
+</body>
+</html>
