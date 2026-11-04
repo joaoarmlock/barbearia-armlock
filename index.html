@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#060606">
+    <title>Barbearia ArmLock | O Templo do Jiu-Jitsu & Estilo</title>
+    
+    <!-- Google Fonts & Bibliotecas -->
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #060606;
+            --surface: #101012;
+            --surface-glow: #1a1a1f;
+            --red: #FF1E1E;
+            --red-glow: rgba(255, 30, 30, 0.45);
+            --gold: #FFD700;
+            --gold-glow: rgba(255, 215, 0, 0.4);
+            --green: #00F59B;
+            --white: #F4F4F6;
+            --muted: #7E7E8A;
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Rajdhani', sans-serif;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 260px;
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px;
+            box-shadow: 0 0 90px rgba(0,0,0,0.95);
+        }
+
+        /* Topo */
+        header { text-align: center; padding: 26px 16px 12px; position: relative; }
+        .logo-container { position: relative; display: inline-block; margin-bottom: 8px; }
+        .logo-img {
+            width: 135px; height: auto;
+            filter: drop-shadow(0 0 22px var(--gold-glow));
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        
+        .slogan-arcade {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.3rem;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            text-shadow: 2px 2px 0px #000;
+        }
+        .slogan-arcade span { color: var(--red); text-shadow: 0 0 12px var(--red-glow); }
+
+        /* Banner Passe de Elite / Voucher */
+        .voucher-banner {
+            margin: 12px 16px;
+            background: linear-gradient(135deg, #1f1a05 0%, #111 100%);
+            border: 1.5px dashed var(--gold);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 6px 20px var(--gold-glow);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .voucher-banner:active { transform: scale(0.98); }
+        .voucher-banner img { width: 55px; height: 55px; border-radius: 10px; object-fit: cover; border: 1px solid var(--gold); }
+        .voucher-text h4 { font-family: 'Teko', sans-serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 1px; line-height: 1; }
+        .voucher-text p { font-size: 0.75rem; color: var(--muted); }
+
+        /* Ações Rápidas */
+        .grid-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 16px; }
+        .action-btn {
+            background: var(--surface); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+            padding: 12px; color: var(--white); text-decoration: none; font-size: 0.82rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;
+        }
+        .action-btn.gold-border { border-color: rgba(255,215,0,0.4); color: var(--gold); }
+
+        /* Menu de Abas Sticky */
+        nav {
+            position: sticky; top: 0; z-index: 100; display: flex; background: rgba(10, 10, 12, 0.95);
+            backdrop-filter: blur(15px); border-bottom: 2px solid #222; padding: 8px 12px; gap: 6px; overflow-x: auto;
+        }
+        nav a {
+            flex: 1; text-align: center; text-decoration: none; color: var(--muted); background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.05); padding: 8px 6px; border-radius: 8px; font-size: 0.75rem; font-weight: 700;
+            font-family: 'Teko', sans-serif
