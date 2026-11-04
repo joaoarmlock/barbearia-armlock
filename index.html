@@ -2,19 +2,23 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0F0F0F">
-    <title>Barbearia ArmLock | O Templo do Degradê e Jiu-Jitsu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#060606">
+    <title>Barbearia ArmLock | O Templo do Jiu-Jitsu & Estilo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0F0F0F;
-            --card: #141414;
-            --card-hover: #191919;
-            --red: #FF2E2E;
-            --gold: #E5B842;
-            --gold-glow: rgba(229,184,66,0.3);
-            --w: #FFFFFF;
-            --mut: #8E8E93;
+            --bg: #060606;
+            --surface: #101012;
+            --surface-glow: #1a1a1f;
+            --red: #FF1E1E;
+            --red-glow: rgba(255, 30, 30, 0.45);
+            --gold: #FFD700;
+            --gold-glow: rgba(255, 215, 0, 0.4);
+            --green: #00F59B;
+            --green-glow: rgba(0, 245, 155, 0.4);
+            --white: #F4F4F6;
+            --muted: #7E7E8A;
             color-scheme: dark;
         }
 
@@ -23,297 +27,357 @@
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
+            font-family: 'Rajdhani', sans-serif;
             outline: none;
         }
 
-        html {
-            scroll-behavior: smooth;
-            background: var(--bg);
-        }
-
         body {
-            background: var(--bg);
-            color: var(--w);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            padding-bottom: 220px;
+            background-color: var(--bg);
+            color: var(--white);
             max-width: 480px;
             margin: 0 auto;
             position: relative;
+            padding-bottom: 260px;
             overflow-x: hidden;
+            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px;
+            box-shadow: 0 0 90px rgba(0,0,0,0.95);
         }
 
-        /* Tela de Carregamento / Splash Screen Blindada */
-        #splash {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.4s ease;
-        }
-        .splash-belt {
-            width: 160px;
-            height: 6px;
-            background: linear-gradient(90deg, #fff 0%, #fff 70%, #000 70%, #000 75%, var(--red) 75%, var(--red) 100%);
-            margin-top: 20px;
-            border-radius: 99px;
-            animation: pulseBelt 1s infinite alternate;
-        }
-        @keyframes pulseBelt {
-            to { transform: scale(1.05); box-shadow: 0 0 15px var(--red); }
-        }
-
-        header {
-            text-align: center;
-            padding: 24px 20px 16px;
-        }
-
+        /* Topo & Logo 3D */
+        header { text-align: center; padding: 26px 16px 12px; position: relative; }
+        .logo-container { position: relative; display: inline-block; margin-bottom: 8px; }
         .logo-img {
-            width: 110px;
-            height: auto;
-            margin-bottom: 12px;
-            filter: drop-shadow(0 4px 12px rgba(229,184,66,0.25));
+            width: 135px; height: auto;
+            filter: drop-shadow(0 0 22px var(--gold-glow));
+            animation: floatLogo 3s ease-in-out infinite;
         }
-
-        .slogan {
-            font-family: 'Impact', sans-serif;
-            font-size: 2rem;
-            letter-spacing: 1px;
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        
+        .slogan-arcade {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.3rem;
+            line-height: 1;
             text-transform: uppercase;
-            line-height: 1.1;
-            margin-bottom: 8px;
+            letter-spacing: 1px;
+            color: var(--white);
+            text-shadow: 2px 2px 0px #000;
         }
-        .slogan span { color: var(--red); }
+        .slogan-arcade span { color: var(--red); text-shadow: 0 0 12px var(--red-glow); }
 
-        .social-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 16px 0;
-        }
-
-        .sbtn {
+        /* Banner Voucher Exclusivo & Roleta Trigger */
+        .voucher-banner {
+            margin: 12px 16px;
+            background: linear-gradient(135deg, #1f1a05 0%, #111 100%);
+            border: 1.5px dashed var(--gold);
+            border-radius: 16px;
+            padding: 12px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px;
-            border-radius: 14px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-decoration: none;
-            background: var(--card);
-            border: 1px solid rgba(255,255,255,0.06);
-            color: var(--w);
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-        .sbtn.gg { border-color: rgba(229,184,66,0.3); color: var(--gold); }
-        .sbtn:active { transform: scale(0.96); background: var(--card-hover); }
-
-        .loc-card {
-            background: var(--card);
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 20px;
-            padding: 16px;
-            text-align: left;
+            gap: 12px;
+            box-shadow: 0 6px 20px var(--gold-glow);
+            overflow: hidden;
             position: relative;
-            margin: 0 16px;
-        }
-
-        .gps-trigger {
-            position: absolute;
-            top: 14px; right: 14px;
-            background: #1c1c1e;
-            border: none;
-            border-radius: 10px;
-            padding: 8px 12px;
             cursor: pointer;
-            color: var(--gold);
-            display: flex; gap: 4px; align-items: center; font-size: 0.7rem; font-weight: 700;
+            transition: transform 0.2s;
         }
+        .voucher-banner:active { transform: scale(0.98); }
+        .voucher-banner img { width: 55px; height: 55px; border-radius: 10px; object-fit: cover; border: 1px solid var(--gold); }
+        .voucher-text h4 { font-family: 'Teko', sans-serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 1px; line-height: 1; }
+        .voucher-text p { font-size: 0.75rem; color: var(--muted); }
 
-        .loc-card h3 { font-size: 0.85rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 4px; }
-        .loc-card p { font-size: 0.85rem; color: #E5E5EA; font-weight: 500; width: 70%; line-height: 1.3; }
-
-        .cronograma {
-            width: 100%;
-            margin-top: 12px;
-            border-collapse: collapse;
-            font-size: 0.82rem;
+        /* Ações Rápidas */
+        .grid-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 16px; }
+        .action-btn {
+            background: var(--surface); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+            padding: 12px; color: var(--white); text-decoration: none; font-size: 0.82rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;
         }
-        .cronograma td { padding: 8px 0; border-top: 1px solid #222; color: #AEAED2; }
-        .cronograma td:last-child { text-align: right; color: var(--w); font-weight: 600; }
+        .action-btn.gold-border { border-color: rgba(255,215,0,0.4); color: var(--gold); }
+        .action-btn:active { transform: scale(0.96); background: var(--surface-glow); }
 
-        .section-title { font-size: 1.15rem; text-transform: uppercase; letter-spacing: 1px; margin: 32px 16px 4px; font-weight: 800; }
-        .sub-title { font-size: 0.8rem; color: var(--mut); margin: 0 16px 16px; }
-
-        /* Escolha de Profissionais (Apenas André e João Paulo) */
-        .barber-container { display: flex; justify-content: center; gap: 32px; padding: 8px 16px; }
-        .barber-card { background: none; border: none; color: var(--w); cursor: pointer; display: flex; flex-direction: column; align-items: center; }
-        .story-ring {
-            width: 88px; height: 88px; border-radius: 50%; padding: 3px;
-            background: linear-gradient(45deg, var(--red), #C13584, var(--gold));
-            position: relative; margin-bottom: 6px; transition: transform 0.3s ease;
-        }
-        .story-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--bg); background: #222; }
-        .verified-badge {
-            position: absolute; bottom: 2px; right: 2px; background: var(--gold); color: #000;
-            font-size: 0.55rem; font-weight: 900; padding: 2px 6px; border-radius: 10px;
-            border: 2px solid var(--bg); transform: scale(0); transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .barber-card.selected .story-ring { background: var(--gold); box-shadow: 0 0 25px var(--gold-glow); transform: scale(1.06); }
-        .barber-card.selected .verified-badge { transform: scale(1); }
-        .barber-card span { font-size: 0.82rem; font-weight: 600; color: #AEAED2; }
-        .barber-card.selected span { color: var(--w); font-weight: 700; }
-
-        /* Navegação Fixa / Sticky Nav */
+        /* Menu Abas Sticky */
         nav {
-            position: sticky; top: 0; z-index: 100; display: flex; gap: 8px; padding: 12px 16px;
-            background: rgba(15,15,15,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            position: sticky; top: 0; z-index: 100; display: flex; background: rgba(10, 10, 12, 0.95);
+            backdrop-filter: blur(15px); border-bottom: 2px solid #222; padding: 8px 12px; gap: 6px; overflow-x: auto;
         }
         nav a {
-            flex: 1; text-align: center; text-decoration: none; color: #AEAED2; background: var(--card);
-            border: 1px solid rgba(255,255,255,0.04); padding: 12px 8px; border-radius: 14px; font-size: 0.8rem; font-weight: 700;
+            flex: 1; text-align: center; text-decoration: none; color: var(--muted); background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.05); padding: 8px 6px; border-radius: 8px; font-size: 0.75rem; font-weight: 700;
+            font-family: 'Teko', sans-serif; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s;
         }
-        nav a.active-nav { color: var(--w); background: rgba(255,255,255,0.06); border-color: var(--gold); }
+        nav a.active { color: #000; background: var(--gold); border-color: var(--gold); font-weight: 800; box-shadow: 0 0 12px var(--gold-glow); }
 
-        /* Filtro de Cabelo Visagista */
-        .hair-filter-box { margin: 24px 16px 0; background: var(--card); border-radius: 20px; padding: 16px; border: 1px solid rgba(255,255,255,0.04); }
-        .filter-title { font-size: 0.8rem; color: var(--gold); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+        .section-title {
+            font-family: 'Teko', sans-serif; font-size: 1.6rem; color: var(--white);
+            margin: 26px 16px 8px; text-transform: uppercase; letter-spacing: 1px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        /* 1. Seleção de Lutadores */
+        .fighters-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
+        .fighter-card {
+            background: var(--surface); border: 2px solid #222; border-radius: 18px; padding: 12px;
+            text-align: center; cursor: pointer; transition: all 0.25s ease; position: relative;
+        }
+        .fighter-avatar { width: 100%; height: 135px; border-radius: 12px; overflow: hidden; background: #000; margin-bottom: 8px; border: 1px solid #333; }
+        .fighter-avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%); transition: 0.3s; }
+        .fighter-card.selected { border-color: var(--gold); background: rgba(255, 215, 0, 0.08); box-shadow: 0 0 25px var(--gold-glow); transform: translateY(-2px); }
+        .fighter-card.selected .fighter-avatar img { filter: grayscale(0%); }
+        .fighter-card.selected::after {
+            content: "PLAYER 1"; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+            background: var(--red); color: #fff; font-size: 0.5rem; font-family: 'Teko', sans-serif; padding: 2px 8px; border-radius: 4px; box-shadow: 0 0 8px var(--red-glow);
+        }
+        .fighter-name { font-family: 'Teko', sans-serif; font-size: 1.35rem; letter-spacing: 1px; }
+        .fighter-sub { font-size: 0.68rem; color: var(--gold); text-transform: uppercase; font-weight: 700; }
+
+        /* Filtro Visagista */
+        .hair-filter-box { margin: 24px 16px 0; background: var(--surface); border-radius: 18px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); }
+        .filter-title { font-family: 'Teko', sans-serif; font-size: 1.15rem; color: var(--gold); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
         .chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
         .chip {
-            background: #0A0A0A; border: 1px solid #222; color: #AEAED2; padding: 8px 14px;
+            background: #0A0A0A; border: 1px solid #333; color: var(--muted); padding: 8px 14px;
             border-radius: 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;
         }
-        .chip.active { background: var(--w); color: #000; border-color: var(--w); font-weight: 700; box-shadow: 0 4px 12px rgba(255,255,255,0.15); }
+        .chip.active { background: var(--white); color: #000; border-color: var(--white); font-weight: 700; box-shadow: 0 4px 12px rgba(255,255,255,0.15); }
 
-        /* Serviços com Imagens Customizadas Cartoon (Zero Bugs) */
-        .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
+        /* 2. Serviços & Combos com feedback de clique aprimorado */
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
         .service-card {
-            background: var(--card); border: 1.5px solid rgba(255,255,255,0.04);
-            border-radius: 20px; padding: 12px; cursor: pointer; display: flex; flex-direction: column;
-            transition: all 0.25s ease; position: relative;
+            background: var(--surface); border: 2px solid #222; border-radius: 18px; padding: 12px;
+            cursor: pointer; display: flex; flex-direction: column; transition: all 0.2s ease; position: relative;
+            overflow: hidden;
         }
-        .service-card img { width: 100%; height: 110px; border-radius: 14px; object-fit: cover; background: #1a1a1a; margin-bottom: 8px; }
-        .service-card h5 { font-size: 0.85rem; font-weight: 700; line-height: 1.2; margin-bottom: 2px; }
-        .service-card h5 small { color: var(--mut); font-size: 0.7rem; display: block; margin-top: 2px; }
-        .service-card .price-tag { color: var(--gold); font-weight: 800; font-size: 0.88rem; margin-top: auto; margin-bottom: 8px; }
-        .service-card.selected { border-color: var(--gold); box-shadow: 0 6px 20px var(--gold-glow); background: linear-gradient(180deg, rgba(229,184,66,0.06) 0%, var(--card) 100%); transform: translateY(-2px); }
+        .service-card img { width: 100%; height: 115px; border-radius: 12px; object-fit: cover; background: #111; margin-bottom: 8px; border: 1px solid #222; }
+        .service-card h5 { font-size: 0.9rem; font-weight: 700; line-height: 1.2; }
+        .service-card h5 small { color: var(--muted); font-size: 0.7rem; display: block; margin-top: 2px; }
+        .service-card .price { font-family: 'Teko', sans-serif; font-size: 1.3rem; color: var(--gold); margin-top: auto; padding-top: 6px; }
+        .service-card.selected { border-color: var(--red); background: rgba(255, 30, 30, 0.08); box-shadow: 0 0 20px var(--red-glow); transform: scale(0.98); }
 
-        /* Seção de Agendamento */
-        .booking-box { margin: 0 16px; background: var(--card); border-radius: 20px; padding: 16px; border: 1px solid rgba(255,255,255,0.04); }
-        .booking-box input[type=date] {
-            width: 100%; background: #0A0A0A; color: var(--w); border: 1.5px solid #222;
-            border-radius: 14px; padding: 14px; font-family: inherit; font-size: 0.95rem; margin-bottom: 4px;
+        /* Efeito de Ondulação (Ripple) ao Clicar no Serviço */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 215, 0, 0.4);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 0.5s linear;
+            pointer-events: none;
         }
-        .error-banner { font-size: 0.78rem; color: var(--red); font-weight: 600; min-height: 18px; margin-bottom: 4px; }
-        .turn-title { font-size: 0.75rem; color: var(--gold); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 8px; }
+        @keyframes rippleEffect {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Modal da Roleta Dopaminérgica Estilo Bom Dia & Cia */
+        #roulette-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.88); backdrop-filter: blur(8px);
+            z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .roulette-container {
+            background: #111116; border: 2px solid var(--gold); border-radius: 24px;
+            width: 100%; max-width: 360px; padding: 20px; text-align: center;
+            box-shadow: 0 0 40px var(--gold-glow); position: relative;
+        }
+        .roulette-close {
+            position: absolute; top: 12px; right: 16px; background: none; border: none;
+            color: var(--muted); font-size: 1.4rem; cursor: pointer; font-family: 'Teko', sans-serif;
+        }
+        .roulette-title { font-family: 'Teko', sans-serif; font-size: 1.8rem; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+        .roulette-sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 16px; }
         
+        .wheel-wrapper { position: relative; width: 260px; height: 260px; margin: 0 auto 16px; }
+        .wheel-pointer {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent;
+            border-top: 22px solid var(--red); z-index: 20; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+        }
+        .wheel {
+            width: 100%; height: 100%; border-radius: 50%; border: 6px solid var(--gold);
+            position: relative; overflow: hidden; transition: transform 4s cubic-bezier(0.15, 0.85, 0.12, 1);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 0 20px var(--gold-glow);
+            background: conic-gradient(
+                #b8860b 0deg 60deg,
+                #1a1a1f 60deg 120deg,
+                #b8860b 120deg 180deg,
+                #1a1a1f 180deg 240deg,
+                #b8860b 240deg 300deg,
+                #1a1a1f 300deg 360deg
+            );
+        }
+        .wheel-center {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 50px; height: 50px; background: radial-gradient(circle, var(--gold) 0%, #b8860b 100%);
+            border-radius: 50%; border: 3px solid #000; z-index: 10;
+            box-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+        .wheel-label {
+            position: absolute; width: 50%; height: 50%; top: 0; left: 50%;
+            transform-origin: 0% 100%; display: flex; align-items: center; justify-content: flex-end;
+            padding-right: 15px; font-family: 'Teko', sans-serif; font-size: 0.85rem; font-weight: 700;
+            color: #fff; text-shadow: 1px 1px 2px #000;
+        }
+        /* Posicionamento dos 6 setores da roleta */
+        .l1 { transform: rotate(30deg) skewY(-30deg); }
+        .l2 { transform: rotate(90deg) skewY(-30deg); }
+        .l3 { transform: rotate(150deg) skewY(-30deg); }
+        .l4 { transform: rotate(210deg) skewY(-30deg); }
+        .l5 { transform: rotate(270deg) skewY(-30deg); }
+        .l6 { transform: rotate(330deg) skewY(-30deg); }
+
+        .spin-btn {
+            background: linear-gradient(90deg, #ff1e1e, #b30000); color: #fff; border: none;
+            width: 100%; padding: 14px; border-radius: 12px; font-family: 'Teko', sans-serif;
+            font-size: 1.4rem; letter-spacing: 2px; cursor: pointer; text-transform: uppercase;
+            box-shadow: 0 4px 15px var(--red-glow); transition: 0.2s;
+        }
+        .spin-btn:active { transform: scale(0.96); }
+        .spin-btn:disabled { background: #333; color: #777; box-shadow: none; cursor: not-allowed; }
+
+        .prize-result {
+            margin-top: 12px; font-family: 'Teko', sans-serif; font-size: 1.2rem;
+            color: var(--green); min-height: 30px; text-transform: uppercase;
+        }
+
+        /* 3. Mapa */
+        .map-card { margin: 0 16px; background: var(--surface); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 18px; }
+        .map-card h3 { font-family: 'Teko', sans-serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 4px; }
+        .map-card p { font-size: 0.85rem; color: #d0d0d5; line-height: 1.3; margin-bottom: 12px; }
+        .landmarks { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+        .landmark-tag { background: #18181f; border: 1px solid #333; font-size: 0.72rem; padding: 5px 10px; border-radius: 8px; color: #aaa; }
+        .gps-btn {
+            width: 100%; background: linear-gradient(90deg, #b8860b, var(--gold)); color: #000; border: none;
+            padding: 12px; border-radius: 12px; font-weight: 900; font-size: 0.88rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* 4. Avaliações */
+        .reviews-scroll { display: flex; gap: 12px; overflow-x: auto; padding: 0 16px; scrollbar-width: none; }
+        .reviews-scroll::-webkit-scrollbar { display: none; }
+        .review-card { min-width: 270px; background: var(--surface); border: 1px solid #222; border-radius: 16px; padding: 14px; }
+        .review-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .review-avatar { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
+        .review-stars { color: var(--gold); font-size: 0.75rem; }
+        .review-txt { font-size: 0.78rem; color: #ccc; line-height: 1.4; }
+
+        /* 5. Agenda PT-BR */
+        .booking-box { margin: 0 16px; background: var(--surface); border-radius: 18px; padding: 18px; border: 1px solid #222; }
+        .booking-box input[type=date] {
+            width: 100%; background: #000; color: #fff; border: 1px solid #333; border-radius: 12px;
+            padding: 14px; font-size: 0.95rem; margin-bottom: 14px; font-family: 'Rajdhani', sans-serif;
+        }
+        .turn-title { font-family: 'Teko', sans-serif; font-size: 1.15rem; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 8px; }
         .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
         .time-slot {
-            position: relative; background: #0A0A0A; color: #E5E5EA; border: 1.5px solid #222;
-            border-radius: 12px; padding: 14px 4px; font-family: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;
+            position: relative; background: #000; color: #fff; border: 1px solid #333; border-radius: 10px; padding: 12px 4px;
+            font-size: 0.82rem; font-weight: 700; cursor: pointer; text-align: center; transition: 0.2s;
         }
-        .time-slot.selected { border-color: var(--red); background: rgba(255,46,46,0.08); color: #fff; }
-        .time-slot:disabled { opacity: 0.15; pointer-events: none; background: #111; }
+        .time-slot.selected { border-color: var(--gold); background: var(--gold); color: #000; font-weight: 900; box-shadow: 0 0 12px var(--gold-glow); }
         .badge {
             position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
-            background: var(--red); color: #fff; font-size: 0.5rem; font-weight: 800;
-            padding: 1px 6px; border-radius: 99px; white-space: nowrap;
+            background: var(--red); color: #fff; font-size: 0.48rem; font-weight: 800;
+            padding: 1px 5px; border-radius: 99px; white-space: nowrap;
         }
         .badge.gold { background: var(--gold); color: #000; }
 
-        /* Carrinho Gamificado Flutuante (Dopamina Máxima) */
+        /* Carrinho Flutuante */
         #checkout-bar {
             position: fixed; left: 50%; bottom: 0; transform: translate(-50%, 110%);
-            width: 100%; max-width: 480px; z-index: 999; background: #111;
-            border-top: 3px solid var(--gold); padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.12);
-            border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+            width: 100%; max-width: 480px; z-index: 999; background: #0A0A0E;
+            border-top: 3px solid var(--gold); padding: 18px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 24px 24px 0 0; box-shadow: 0 -15px 40px rgba(0,0,0,0.95);
         }
         #checkout-bar.active { transform: translate(-50%, 0); }
         .bar-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-        .bar-label { font-size: 0.7rem; color: var(--mut); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-        #rank-badge { font-size: 0.65rem; font-weight: 900; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; background: var(--gold); color: #000; }
-        #cart-summary { font-size: 0.85rem; font-weight: 600; color: #E5E5EA; max-width: 65%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .total-display { font-size: 1.3rem; font-weight: 900; color: var(--gold); }
+        .bar-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        #rank-badge { font-size: 0.68rem; font-weight: 900; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; background: var(--gold); color: #000; }
+        .total-price { font-family: 'Teko', sans-serif; font-size: 1.7rem; color: var(--gold); }
         .progress-track { height: 6px; background: #222; border-radius: 99px; overflow: hidden; margin: 6px 0 14px; }
         .progress-fill { height: 100%; width: 0%; border-radius: 99px; background: var(--gold); transition: width 0.4s ease; }
         
-        #submit-btn {
-            width: 100%; border: none; border-radius: 16px; padding: 16px; font-family: inherit;
-            font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px; cursor: pointer;
-            background: #222; color: #555; pointer-events: none; transition: all 0.2s ease;
+        .submit-btn {
+            width: 100%; border: none; border-radius: 14px; padding: 16px; font-weight: 900;
+            font-size: 0.92rem; background: #222; color: #666; pointer-events: none; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.2s ease;
         }
-        #submit-btn.unlocked { pointer-events: auto; background: #0E9F6E; color: var(--w); box-shadow: 0 4px 15px rgba(14,159,110,0.3); }
-        #submit-btn.unlocked:active { transform: scale(0.97); }
+        .submit-btn.unlocked {
+            pointer-events: auto; background: #0E9F6E; color: var(--white);
+            box-shadow: 0 4px 20px rgba(14,159,110,0.4); font-weight: 900;
+        }
+        .submit-btn.unlocked:active { transform: scale(0.97); }
     </style>
 </head>
 <body>
 
-    <!-- Tela de Carregamento Blindada contra Tela Preta -->
-    <div id="splash">
-        <h1 class="slogan" style="font-size: 1.8rem; text-align: center;">BARBEARIA<br><span style="color:var(--red)">ARMLOCK</span></h1>
-        <div class="splash-belt"></div>
-    </div>
-
-    <!-- Header & Logo Oficial -->
+    <!-- Header -->
     <header>
-        <img src="logo.png" alt="Logo Barbearia ArmLock" class="logo-img" onerror="this.style.display='none'">
-        <div class="slogan">Dê um ArmLock<br><span>no seu visual</span></div>
-        <div style="font-size: 0.85rem; color: var(--mut); margin-bottom: 16px;">@barbearia_armlock</div>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo ArmLock" class="logo-img" onerror="this.style.display='none'">
+        </div>
+        <div class="slogan-arcade">Dê um ArmLock<br><span>no seu visual</span></div>
+        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 4px;">@barbearia_armlock</div>
 
-        <div class="social-grid">
-            <a href="https://instagram.com/barbearia_armlock" target="_blank" class="sbtn">📸 Instagram Oficial</a>
-            <a href="https://g.page/r/CaMUFuovg62eEBM/review" target="_blank" class="sbtn gg">⭐ Avaliações Google</a>
+        <div class="grid-actions" style="margin-top: 14px;">
+            <a href="https://instagram.com/barbearia_armlock" target="_blank" class="action-btn">📸 Instagram Oficial</a>
+            <a href="https://g.page/r/CaMUFuovg62eEBM/review" target="_blank" class="action-btn gold-border">⭐ Avaliações Google</a>
         </div>
     </header>
 
-    <!-- Localização e GPS Corrigida -->
-    <div class="loc-card">
-        <button class="gps-trigger" onclick="openGPS()">📍 Rota GPS</button>
-        <h3>TATAME CENTRAL</h3>
-        <p>Avenida Bom Jesus da Lapa, 1877<br>Vila Nova Bonsucesso, Guarulhos - SP</p>
-        <table class="cronograma">
-            <tr><td>Segunda a Sábado</td><td>09h às 19h</td></tr>
-            <tr><td>Domingos</td><td>Fechado</td></tr>
-        </table>
+    <!-- Voucher Secreto / Roleta Trigger -->
+    <div class="voucher-banner" onclick="openRoulette()">
+        <img src="voucher.jpg" alt="Voucher" onerror="this.src='https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=100&auto=format&fit=crop'">
+        <div class="voucher-text">
+            <h4>Roleta de Prêmios ArmLock</h4>
+            <p>Toque para girar e ganhar brindes exclusivos! <i>*Válido após o 1º corte.</i></p>
+        </div>
     </div>
 
-    <!-- Menu Sticky -->
+    <!-- Modal Roleta Dopaminérgica Estilo Bom Dia & Cia -->
+    <div id="roulette-modal">
+        <div class="roulette-container">
+            <button class="roulette-close" onclick="closeRoulette()">✕</button>
+            <div class="roulette-title">Roleta Premiada</div>
+            <div class="roulette-sub">Gire para testar sua sorte no tatame!</div>
+            
+            <div class="wheel-wrapper">
+                <div class="wheel-pointer"></div>
+                <div class="wheel" id="rouletteWheel">
+                    <div class="wheel-label l1">Nariz/Orelha</div>
+                    <div class="wheel-label l2">Sobrancelha</div>
+                    <div class="wheel-label l3">Penteado</div>
+                    <div class="wheel-label l4">50% OFF</div>
+                    <div class="wheel-label l5">Brinde Surpresa</div>
+                    <div class="wheel-label l6">Corte VIP</div>
+                </div>
+                <div class="wheel-center"></div>
+            </div>
+
+            <button id="spinBtn" class="spin-btn" onclick="spinWheel()">GIRAR ROLETA 🎡</button>
+            <div id="prizeResult" class="prize-result"></div>
+        </div>
+    </div>
+
+    <!-- Menu Abas Arcade -->
     <nav id="nav-bar">
-        <a href="#profissionais-section" class="active-nav">🪒 Profissionais</a>
-        <a href="#servicos-section">🥋 Técnicas & Serviços</a>
+        <a href="#profissionais-section" class="active">Lutadores</a>
+        <a href="#servicos-section">Combos</a>
+        <a href="#agenda">Agenda</a>
     </nav>
 
-    <!-- 1. Escolha do Profissional (Apenas André e João Paulo) -->
-    <div id="profissionais-section" class="section-title">1. Escolha o Faixa-Preta</div>
-    <div class="sub-title">Selecione o profissional encarregado do seu visual</div>
-    <div class="barber-container">
-        <!-- André -->
-        <button class="barber-card" onclick="selectBarber('André', this)">
-            <div class="story-ring">
-                <img src="andre.jpg" alt="André" onerror="this.src='https://via.placeholder.com/150/111/fff?text=André'">
-                <div class="verified-badge">VIP</div>
-            </div>
-            <span>André</span>
-        </button>
-        
-        <!-- João Paulo -->
-        <button class="barber-card" onclick="selectBarber('João Paulo', this)">
-            <div class="story-ring">
-                <img src="joao.jpg" alt="João Paulo" onerror="this.src='https://via.placeholder.com/150/111/fff?text=Joao'">
-                <div class="verified-badge">VIP</div>
-            </div>
-            <span>João Paulo</span>
-        </button>
+    <!-- 1. Profissionais -->
+    <div id="profissionais-section" class="section-title"><span>🪒 Escolha o Faixa-Preta</span></div>
+    <div class="fighters-container">
+        <div class="fighter-card" onclick="selectBarber('João Paulo', this)">
+            <div class="fighter-avatar"><img src="faixapreta.png" alt="João Paulo" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop'"></div>
+            <div class="fighter-name">JOÃO PAULO</div>
+            <div class="fighter-sub">Faixa-Preta VIP</div>
+        </div>
+        <div class="fighter-card" onclick="selectBarber('André', this)">
+            <div class="fighter-avatar"><img src="triangulo.png" alt="André" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop'"></div>
+            <div class="fighter-name">ANDRÉ</div>
+            <div class="fighter-sub">Barber Gold</div>
+        </div>
     </div>
 
-    <!-- Filtro de Cabelo Atual -->
+    <!-- Filtro Visagista -->
     <div class="hair-filter-box">
         <div class="filter-title">🎯 Qual o seu tipo de cabelo atual?</div>
         <div class="chip-group">
@@ -322,7 +386,7 @@
             <button class="chip" onclick="selectChip('hair', 'Crespo', this)">Crespo</button>
             <button class="chip" onclick="selectChip('hair', 'Afro', this)">Afro</button>
         </div>
-        <div class="filter-title" style="margin-top: 14px;">✂️ Qual o corte objetivo?</div>
+        <div class="filter-title" style="margin-top: 12px;">✂️ Qual o corte objetivo?</div>
         <div class="chip-group">
             <button class="chip" onclick="selectChip('style', 'Degradê Navalhado', this)">Degradê Navalhado</button>
             <button class="chip" onclick="selectChip('style', 'Americano / Tape', this)">Americano / Tape</button>
@@ -331,75 +395,84 @@
         </div>
     </div>
 
-    <!-- 2. Técnicas e Serviços -->
-    <div id="servicos-section" class="section-title" style="padding-top: 16px;">🥋 Técnicas & Serviços</div>
-    <div class="sub-title">Selecione o serviço com a identidade do Jiu-Jitsu</div>
-
-    <div class="extras-grid">
-        <!-- Corte Armlock -->
+    <!-- 2. Serviços Unificados -->
+    <div id="servicos-section" class="section-title"><span>🥋 Técnicas & Combos</span></div>
+    <div class="services-grid">
         <div class="service-card" data-id="corte" data-base="Corte [Armlock]" data-price="45.00" onclick="clickServiceCard(this, event)">
-            <img src="armlock.png" alt="Corte Armlock" onerror="this.src='https://via.placeholder.com/150/222/fff?text=Corte'">
+            <img src="armlock.png" alt="Corte Armlock" onerror="this.src='https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=300&auto=format&fit=crop'">
             <h5>Corte <small>[Armlock]</small></h5>
-            <div class="price-tag">R$ 45,00</div>
+            <div class="price">R$ 45,00</div>
         </div>
-
-        <!-- Barba Ezequiel -->
-        <div class="service-card" data-id="barba" data-base="Barba [Ezequiel]" data-price="45.00" onclick="clickServiceCard(this, event)">
-            <img src="ezequiel.png" alt="Barba Ezequiel" onerror="this.src='https://via.placeholder.com/150/222/fff?text=Barba'">
+        <div class="service-card" data-id="barba" data-base="Barba [Ezequiel]" data-price="30.00" onclick="clickServiceCard(this, event)">
+            <img src="ezequiel.png" alt="Barba Ezequiel" onerror="this.src='https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=300&auto=format&fit=crop'">
             <h5>Barba <small>[Ezequiel]</small></h5>
-            <div class="price-tag">R$ 45,00</div>
+            <div class="price">R$ 30,00</div>
         </div>
-
-        <!-- Progressiva Guarda Fechada -->
         <div class="service-card" data-id="progressiva" data-base="Progressiva [Guarda Fechada]" data-price="80.00" onclick="clickServiceCard(this, event)">
-            <img src="progressiva.png" alt="Progressiva" onerror="this.src='https://via.placeholder.com/150/222/fff?text=Progressiva'">
+            <img src="progressiva.png" alt="Progressiva" onerror="this.src='https://images.unsplash.com/photo-1560066984-138dadb4c035?w=300&auto=format&fit=crop'">
             <h5>Progressiva <small>[Guarda Fechada]</small></h5>
-            <div class="price-tag">R$ 80,00</div>
+            <div class="price">R$ 80,00</div>
         </div>
-
-        <!-- Barboterapia Leglock -->
         <div class="service-card" data-id="barboterapia" data-base="Barboterapia [Leglock]" data-price="50.00" onclick="clickServiceCard(this, event)">
-            <img src="leglock.png" alt="Barboterapia" onerror="this.src='https://via.placeholder.com/150/222/fff?text=Barboterapia'">
+            <img src="leglock.png" alt="Barboterapia" onerror="this.src='https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=300&auto=format&fit=crop'">
             <h5>Barboterapia <small>[Leglock]</small></h5>
-            <div class="price-tag">R$ 50,00</div>
+            <div class="price">R$ 50,00</div>
         </div>
-
-        <!-- Pezinho De La Riva -->
         <div class="service-card" data-id="pezinho" data-base="Pezinho [De La Riva]" data-price="15.00" onclick="clickServiceCard(this, event)">
-            <img src="delariva.png" alt="Pezinho" onerror="this.src='https://via.placeholder.com/150/222/fff?text=Pezinho'">
+            <img src="delariva.png" alt="Pezinho" onerror="this.src='https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=300&auto=format&fit=crop'">
             <h5>Pezinho <small>[De La Riva]</small></h5>
-            <div class="price-tag">R$ 15,00</div>
+            <div class="price">R$ 15,00</div>
         </div>
-
-        <!-- Botox Chave de Pulso -->
         <div class="service-card" data-id="botox" data-base="Botox [Chave de Pulso]" data-price="70.00" onclick="clickServiceCard(this, event)">
-            <img src="chavedepulso.png" alt="Botox" onerror="this.src='https://via.placeholder.com/150/222/fff?text=Botox'">
+            <img src="chavedepulso.png" alt="Botox" onerror="this.src='https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=300&auto=format&fit=crop'">
             <h5>Botox <small>[Chave de Pulso]</small></h5>
-            <div class="price-tag">R$ 70,00</div>
-        </div>
-
-        <!-- Freestyle Triângulo -->
-        <div class="service-card" data-id="freestyle" data-base="Freestyle [Triângulo]" data-price="25.00" onclick="clickServiceCard(this, event)">
-            <img src="triangulo.png" alt="Freestyle" onerror="this.src='https://via.placeholder.com/150/222/fff?text=Freestyle'">
-            <h5>Freestyle <small>[Triângulo]</small></h5>
-            <div class="price-tag">R$ 25,00</div>
-        </div>
-
-        <!-- Penteado Mata-Barata -->
-        <div class="service-card" data-id="penteado" data-base="Penteado [Mata-Barata]" data-price="30.00" onclick="clickServiceCard(this, event)">
-            <img src="matabarata.png" alt="Penteado" onerror="this.src='https://via.placeholder.com/150/222/fff?text=Penteado'">
-            <h5>Penteado <small>[Mata-Barata]</small></h5>
-            <div class="price-tag">R$ 30,00</div>
+            <div class="price">R$ 70,00</div>
         </div>
     </div>
 
-    <!-- 3. Data e Horário -->
-    <div class="section-title" style="margin-top: 32px;">3. Data e Horário</div>
-    <div class="sub-title">Defina o momento do seu combate na agenda</div>
+    <!-- 3. Localização -->
+    <div id="localizacao" class="section-title"><span>📍 Onde Fica o Tatame</span></div>
+    <div class="map-card">
+        <h3>Vila Nova Bonsucesso — Guarulhos/SP</h3>
+        <p>Avenida Bom Jesus da Lapa, 1877</p>
+        <div class="landmarks">
+            <span class="landmark-tag">🛒 Perto do Nagumo</span>
+            <span class="landmark-tag">🧸 Tio Bru Brinquedos</span>
+            <span class="landmark-tag">📱 Assistência Técnica ao Lado</span>
+        </div>
+        <button class="gps-btn" onclick="openGPS()">🧭 Abrir Rota no Google Maps</button>
+    </div>
 
+    <!-- 4. Avaliações -->
+    <div id="avaliacoes" class="section-title"><span>⭐ Avaliações Reais (33 Notas 5.0)</span></div>
+    <div class="reviews-scroll">
+        <div class="review-card">
+            <div class="review-head">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop" class="review-avatar" alt="Matheus">
+                <div>
+                    <strong>Matheus Silva</strong>
+                    <div class="review-stars">★★★★★</div>
+                </div>
+            </div>
+            <p class="review-txt">"Melhor degradê de Guarulhos! Atendimento brabo e imersão total."</p>
+        </div>
+        <div class="review-card">
+            <div class="review-head">
+                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&auto=format&fit=crop" class="review-avatar" alt="Lucas">
+                <div>
+                    <strong>Lucas Santos</strong>
+                    <div class="review-stars">★★★★★</div>
+                </div>
+            </div>
+            <p class="review-txt">"Barba na navalha impecável e barboterapia de primeira. Recomendo!"</p>
+        </div>
+    </div>
+
+    <!-- 5. Agenda PT-BR -->
+    <div id="agenda" class="section-title"><span>📅 Data & Horário do Combate</span></div>
     <div class="booking-box">
         <input type="date" id="dateSelector" onchange="handleDateSelection(this.value)">
-        <div id="dateAlert" class="error-banner"></div>
+        <div id="dateAlert" style="font-size: 0.78rem; color: var(--red); font-weight: 600; min-height: 18px; margin-bottom: 4px;"></div>
 
         <div class="turn-title">🌅 Período da Manhã</div>
         <div id="morning-slots" class="slots-grid"></div>
@@ -408,23 +481,22 @@
         <div id="afternoon-slots" class="slots-grid"></div>
     </div>
 
-    <!-- Carrinho Gamificado Flutuante -->
+    <!-- Carrinho Flutuante -->
     <div id="checkout-bar">
         <div class="bar-row">
             <span class="bar-label">Graduação do Estilo</span>
             <span id="rank-badge">Faixa Branca</span>
         </div>
         <div class="bar-row">
-            <div id="cart-summary">Nenhum serviço selecionado</div>
-            <div class="total-display">R$ <span id="total-val">0,00</span></div>
+            <div id="cart-summary" style="font-size: 0.85rem; font-weight: 600; color: #E5E5EA; max-width: 65%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Nenhum serviço selecionado</div>
+            <div class="total-price">R$ <span id="total-val">0,00</span></div>
         </div>
         <div class="progress-track">
             <div id="progress-fill-bar" class="progress-fill"></div>
         </div>
-        <button id="submit-btn" onclick="executeOrder()">Escolha Profissional, Data e Horário</button>
+        <button id="submit-btn" class="submit-btn" onclick="executeOrder()">Escolha Profissional, Data e Horário</button>
     </div>
 
-    <!-- Script de Lógica Consolidado e Seguro -->
     <script>
         let appState = {
             barber: '',
@@ -433,36 +505,60 @@
             timeSlot: '',
             rawPrice: 0,
             hairType: '',
-            styleObjective: ''
+            styleObjective: '',
+            wonVoucher: ''
         };
 
-        window.addEventListener('load', () => {
+        // Controlo da Roleta Dopaminérgica
+        let currentRotation = 0;
+        function openRoulette() {
+            document.getElementById('roulette-modal').style.display = 'flex';
+        }
+        function closeRoulette() {
+            document.getElementById('roulette-modal').style.display = 'none';
+        }
+
+        function spinWheel() {
+            const btn = document.getElementById('spinBtn');
+            const wheel = document.getElementById('rouletteWheel');
+            const resultDiv = document.getElementById('prizeResult');
+            
+            btn.disabled = true;
+            resultDiv.innerText = "Girando a roleta da sorte...";
+
+            // 6 prêmios (cada setor tem 60 graus)
+            const prizes = [
+                "Depilação Nariz e Orelha Grátis!",
+                "Sobrancelha Grátis!",
+                "Penteado Grátis!",
+                "50% de Desconto no Próximo Corte!",
+                "Brinde Surpresa ArmLock!",
+                "Corte VIP Grátis!"
+            ];
+
+            // Sorteia um índice aleatório de 0 a 5
+            const randomIndex = Math.floor(Math.random() * prizes.length);
+            
+            // Cada fatia tem 60 graus. Queremos que pare no meio do setor correspondente.
+            // Voltas completas extras (ex: 5 voltas = 1800 graus) para dar efeito dramático
+            const degreesPerSlice = 60;
+            const extraSpins = 360 * 5;
+            // Alinhamento para o topo (ponteiro em cima)
+            const targetDegree = extraSpins + (randomIndex * degreesPerSlice) + (degreesPerSlice / 2);
+            
+            currentRotation += targetDegree;
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+
             setTimeout(() => {
-                const splash = document.getElementById('splash');
-                if(splash) {
-                    splash.style.opacity = '0';
-                    setTimeout(() => splash.remove(), 400);
-                }
-            }, 800);
-        });
+                appState.wonVoucher = prizes[randomIndex];
+                resultDiv.innerHTML = `🎉 PARABÉNS! Você ganhou: <br><b>${appState.wonVoucher}</b><br><span style="font-size:0.65rem; color:#aaa;">*(Disponível para uso após o seu 1º corte na ArmLock)*</span>`;
+                btn.disabled = false;
+            }, 4000);
+        }
 
         const picker = document.getElementById('dateSelector');
         const tzToday = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Sao_Paulo"}));
         picker.min = `${tzToday.getFullYear()}-${String(tzToday.getMonth() + 1).padStart(2, '0')}-${String(tzToday.getDate()).padStart(2, '0')}`;
-
-        window.addEventListener('scroll', () => {
-            const servSec = document.getElementById('servicos-section');
-            const links = document.querySelectorAll('#nav-bar a');
-            if(window.scrollY >= servSec.offsetTop - 90) {
-                links[0].classList.remove('active-nav'); links[1].classList.add('active-nav');
-            } else {
-                links[1].classList.remove('active-nav'); links[0].classList.add('active-nav');
-            }
-        });
-
-        function openGPS() {
-            window.open("https://maps.google.com/?q=Avenida+Bom+Jesus+da+Lapa+1877+Vila+Nova+Bonsucesso+Guarulhos", "_blank");
-        }
 
         function selectChip(type, value, element) {
             const parent = element.closest('.chip-group');
@@ -473,16 +569,30 @@
         }
 
         function selectBarber(name, element) {
-            document.querySelectorAll('.barber-card').forEach(item => item.classList.remove('selected'));
+            document.querySelectorAll('.fighter-card').forEach(item => item.classList.remove('selected'));
             element.classList.add('selected');
             appState.barber = name;
             validateAppState();
         }
 
+        // Efeito visual ripple ao clicar nos serviços antes de enviar pro zap
         function clickServiceCard(card, event) {
             const serviceId = card.getAttribute('data-id');
             const baseName = card.getAttribute('data-base');
             const currentPrice = parseFloat(card.getAttribute('data-price'));
+
+            // Criar animação de efeito ripple no clique
+            const circle = document.createElement('span');
+            const diameter = Math.max(card.clientWidth, card.clientHeight);
+            const radius = diameter / 2;
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - card.getBoundingClientRect().left - radius}px`;
+            circle.style.top = `${event.clientY - card.getBoundingClientRect().top - radius}px`;
+            circle.classList.add('ripple');
+            
+            const existingRipple = card.getElementsByClassName('ripple')[0];
+            if (existingRipple) existingRipple.remove();
+            card.appendChild(circle);
 
             if(card.classList.contains('selected')) {
                 card.classList.remove('selected');
@@ -516,15 +626,15 @@
             if(!canRender) return;
             const pipeline = ['09:00','09:40','10:20','11:00','11:40','13:00','13:40','14:20','15:00','15:40','16:20','17:00','17:40','18:20'];
             pipeline.forEach((time, index) => {
-                const slotButton = document.createElement('button');
-                slotButton.className = 'time-slot'; 
+                const slotButton = document.createElement('div');
+                slotButton.className = 'time-slot';
                 slotButton.innerText = time;
                 if(index === 1 || index === 7) slotButton.innerHTML += `<span class="badge">Última Vaga</span>`;
                 else if(index === 4 || index === 10) slotButton.innerHTML += `<span class="badge gold">Disputado</span>`;
                 slotButton.onclick = () => {
                     document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-                    slotButton.classList.add('selected'); 
-                    appState.timeSlot = time; 
+                    slotButton.classList.add('selected');
+                    appState.timeSlot = time;
                     validateAppState();
                 };
                 if(parseInt(time.split(':')) < 12) morningContainer.appendChild(slotButton);
@@ -533,12 +643,12 @@
         }
 
         function updateCheckoutData() {
-            let summaryList = []; 
+            let summaryList = [];
             appState.rawPrice = 0;
             
-            Object.values(appState.services).forEach(item => { 
-                summaryList.push(item.name); 
-                appState.rawPrice += item.price; 
+            Object.values(appState.services).forEach(item => {
+                summaryList.push(item.name);
+                appState.rawPrice += item.price;
             });
 
             const bar = document.getElementById('checkout-bar');
@@ -569,8 +679,8 @@
         function validateAppState() {
             const mainActionBtn = document.getElementById('submit-btn');
             if(appState.barber && appState.dateStr && appState.timeSlot && appState.rawPrice > 0) {
-                mainActionBtn.classList.add('unlocked'); 
-                mainActionBtn.innerText = 'FINALIZAR AGENDAMENTO NO WHATSAPP';
+                mainActionBtn.classList.add('unlocked');
+                mainActionBtn.innerText = 'FINALIZAR AGENDAMENTO NO WHATSAPP 🚀';
             } else {
                 mainActionBtn.classList.remove('unlocked');
                 let blocksMissing = [];
@@ -579,6 +689,10 @@
                 if(appState.rawPrice === 0) blocksMissing.push('Serviço');
                 mainActionBtn.innerText = 'Falta selecionar: ' + blocksMissing.join(', ');
             }
+        }
+
+        function openGPS() {
+            window.open("https://maps.google.com/?q=Avenida+Bom+Jesus+da+Lapa+1877+Vila+Nova+Bonsucesso+Guarulhos", "_blank");
         }
 
         function executeOrder() {
@@ -590,6 +704,7 @@
             let metaText = '';
             if(appState.hairType) metaText += `\n💈 *Tipo de Cabelo:* ${appState.hairType}`;
             if(appState.styleObjective) metaText += `\n🎯 *Corte Alvo:* ${appState.styleObjective}`;
+            if(appState.wonVoucher) metaText += `\n🎁 *Prêmio da Roleta:* ${appState.wonVoucher} *(Resgate após 1º corte)*`;
             
             const payloadMessage = `Oss! 🥋 Vim pelo site agendar meu horário na Barbearia ArmLock:\n\n` +
                 `🪒 *Profissional:* ${appState.barber}\n` +
